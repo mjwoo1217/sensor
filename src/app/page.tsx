@@ -1,103 +1,94 @@
+"use client";
+
 import Image from "next/image";
+import {useState} from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    // 상수 선언
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [darkMode, setDarkMode] = useState(false)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    // 아이콘 선언
+    const navItems = [
+        {name: "대쉬보드", icon: "1"},
+        {name: "프로젝트", icon: "2"},
+        {name: "캘린더", icon: "3"},
+        {name: "문서", icon: "4"},
+        {name: "보고서", icon: "5"}
+    ]
+
+    return (
+        <div className={"flex bg-gray-100 h-screen"}>
+            {/* sidebar */}
+            <div
+                className={`fixed bg-white w-64 h-screen shadow ${
+                    sidebarOpen ? "translate-x-0" : "-translate-x-64"
+                } lg:translate-x-0 lg:static`}
+            >
+                <div className={"p-4 flex justify-between border-b"}>
+                    <div className={"text-xl font-bold"}>Logo</div>
+                    <button
+                        className={"lg:hidden"}
+                        onClick={() => setSidebarOpen(false)}
+                    >X
+                    </button>
+                </div>
+
+                {/* nav category */}
+                <div className={"p-4 space-y-2"}>
+                    {navItems.map((item) => {
+                        return (
+                            <div className={"flex p-2"}>
+                                <div className={"text-xl"}>{item.icon}</div>
+                                <div className={"text-xl"}>{item.name}</div>
+                            </div>
+                        )
+                    })}
+                </div>
+                {/*darkMode*/}
+              <div className={"flex text-2xl justify-left p-4"}>
+                {darkMode ?
+                    (
+                        <button
+                            className={"p-2 bg-black rounded-full"}
+                            onClick={() => setDarkMode(false)}
+                        >#</button>
+                    ) : (
+                        <button
+                            className={"p-2 bg-black rounded-full"}
+                            onClick={() => setDarkMode(false)}
+                        >*</button>
+                  )}
+              </div>
+            </div>
+
+
+            {/* main content */}
+            <main className={"flex-1"}>
+                <header className={"bg-white flex justify-between p-4"}>
+                    <button
+                        className={"p-2 text-xl font-bold lg:hidden"}
+                        onClick={() => setSidebarOpen(true)}
+                    >☰
+                    </button>
+                    <h1 className={"text-2xl font-bold"}></h1>
+                    <div className={"bg-gray-300 w-10 h-10 rounded-full"}></div>
+                </header>
+                <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-4"}>
+                  <div className={"bg-white p-6 shadow-lg rounded-lg"}>
+                    <h2 className={"text-xl font-bold"}>Card</h2>
+                    <p className={"text-lg p-1 text-gray-700"}>test</p>
+                  </div>
+                  <div className={"bg-white p-6 shadow-lg rounded-lg"}>
+                    <h2 className={"text-xl font-bold"}>Card</h2>
+                    <p className={"text-lg p-1 text-gray-700"}>test</p>
+                  </div>
+                  <div className={"bg-white p-6 shadow-lg rounded-lg"}>
+                    <h2 className={"text-xl font-bold"}>Card</h2>
+                    <p className={"text-lg p-1 text-gray-700"}>test</p>
+                  </div>
+                </div>
+            </main>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    )
 }
