@@ -10,11 +10,11 @@ export default function Home() {
 
     // 아이콘 선언
     const navItems = [
-        {name: "대쉬보드", icon: "1"},
-        {name: "프로젝트", icon: "2"},
-        {name: "캘린더", icon: "3"},
-        {name: "문서", icon: "4"},
-        {name: "보고서", icon: "5"}
+        {name: "대쉬보드", icon: "💻"},
+        {name: "프로젝트", icon: "💼"},
+        {name: "캘린더", icon: "📆"},
+        {name: "문서", icon: "📝"},
+        {name: "보고서", icon: "🧾️"}
     ]
 
     return (
@@ -52,12 +52,12 @@ export default function Home() {
                         <button
                             className={"p-2 bg-black rounded-full"}
                             onClick={() => setDarkMode(false)}
-                        >#</button>
+                        >🌙</button>
                     ) : (
                         <button
                             className={"p-2 bg-black rounded-full"}
                             onClick={() => setDarkMode(false)}
-                        >*</button>
+                        >⭐</button>
                   )}
               </div>
             </div>
