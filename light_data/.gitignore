@@ -1,0 +1,11 @@
+
+# .gitignore
+.env
+
+#inteillj
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+gen
